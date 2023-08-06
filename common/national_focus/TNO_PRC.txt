@@ -1,0 +1,521 @@
+#Organ Tree by Wendell08
+
+focus_tree = {
+	id = PRC_starting_tree
+	country = {
+		factor = 0
+		modifier = {
+			add = 20
+			tag = PRC
+		}
+	}
+	default = no
+	focus = {
+		id = PRC_The_Eastern_Conflict
+		icon = GFX_PRC_The_Eastern_Conflict
+		cost = 3.00
+		x = 5
+		y = 0
+		select_effect = {
+			hidden_effect = {
+				country_event = { #intro event
+					id = PRC.4
+					days = 1
+				}
+			}
+		}
+		available = {
+			has_war = no
+		}
+		bypass = {
+			has_war = yes
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRC_The_Eastern_Conflict"
+			country_event = {
+				id = PRC.1
+				days = 1
+			}
+		}
+	}
+	focus = {
+		id = PRC_Fortify_the_Border
+		icon = GFX_YUN_Fortify_The_Border
+		cost = 3.00
+		prerequisite = {
+			focus = PRC_The_Eastern_Conflict
+		}
+		available = {
+			has_war = no
+		}
+		bypass = {
+			has_war = yes
+		}
+		x = 0
+		y = 1
+		relative_position_id = PRC_The_Eastern_Conflict
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRC_Fortify_the_Border"
+			329 = {
+				add_building_construction = {
+					type = bunker
+					level = 1
+					instant_build = yes
+					province = {
+						id = 10597
+						id = 12610
+						id = 1877
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = PRC_Prepare_the_Men
+		icon = GFX_Generic_Soldiers_Red
+		cost = 3.00
+		prerequisite = {
+			focus = PRC_Fortify_the_Border
+		}
+		available = {
+			has_war = no
+		}
+		bypass = {
+			has_war = yes
+		}
+		x = 0
+		y = 1
+		relative_position_id = PRC_Fortify_the_Border
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRC_Prepare_the_Men"
+			add_stability = 0.05
+			add_manpower = 500
+			TNO_improve_conscription_policy_effectiveness_med = yes
+		}
+	}
+	focus = {
+		id = PRC_Favor_the_Mongolians
+		icon = GFX_NOV_connections_in_mongolia
+		cost = 2.00
+		prerequisite = {
+			focus = PRC_Prepare_the_Men
+		}
+		mutually_exclusive = {
+			focus = PRC_Favor_the_Russians
+		}
+		available = {
+			has_war = no
+		}
+		bypass = {
+			has_war = yes
+		}
+		x = -1
+		y = 1
+		relative_position_id = PRC_Prepare_the_Men
+		ai_will_do = {
+			factor = 0.5
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRC_Favor_the_Mongolians"
+			add_to_variable = {
+				PRC_MON_divide = -1
+				tooltip = PRC_MON_faction_tt
+			}
+		}
+	}
+
+	focus = {
+		id = PRC_Favor_the_Russians
+		icon = GFX_Against_The_Opposition
+		cost = 2.00
+		prerequisite = {
+			focus = PRC_Prepare_the_Men
+		}
+		mutually_exclusive = {
+			focus = PRC_Favor_the_Mongolians
+		}
+		available = {
+			has_war = no
+		}
+		bypass = {
+			has_war = yes
+		}
+		ai_will_do = {
+			factor = 2
+		}
+		x = 1
+		y = 1
+		relative_position_id = PRC_Prepare_the_Men
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRC_Favor_the_Russians"
+			add_to_variable = {
+				PRC_MON_divide = 1
+				tooltip = PRC_RUS_faction_tt
+			}
+		}
+	}
+
+	focus = {
+		id = PRC_Recruitment_campaign
+		icon = GFX_new_model_army
+		cost = 4.00
+		prerequisite = {
+			focus = PRC_Favor_the_Mongolians
+		}
+		available = {
+			has_war = no
+		}
+		bypass = {
+			has_war = yes
+		}
+		x = 0
+		y = 1
+		relative_position_id = PRC_Favor_the_Mongolians
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRC_Recruitment_campaign"
+			add_manpower = 500
+			TNO_improve_conscription_policy_effectiveness_med = yes
+			TNO_worsen_army_professionalism_med = yes
+		}
+	}
+
+	focus = {
+		id = PRC_Legacy_of_the_Siberian_Red_Army
+		icon = GFX_IRK_Red_Siberia
+		cost = 4.00
+		prerequisite = {
+			focus = PRC_Favor_the_Russians
+		}
+		available = {
+			has_war = no
+		}
+		bypass = {
+			has_war = yes
+		}
+		x = 0
+		y = 1
+		relative_position_id = PRC_Favor_the_Russians
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRC_Legacy_of_the_Siberian_Red_Army"
+			army_experience = 25
+		}
+	}
+
+	focus = {
+		id = PRC_Give_More_Rights
+		icon = GFX_socialism_of_the_people
+		cost = 4.00
+		prerequisite = {
+			focus = PRC_Recruitment_campaign
+		}
+		available = {
+			has_war = no
+		}
+		bypass = {
+			has_war = yes
+		}
+		x = -1
+		y = 1
+		relative_position_id = PRC_Recruitment_campaign
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRC_Give_More_Rights"
+			tno_minorities_improve = yes
+			country_event = {
+				id = PRC.15
+				days = 1
+			}
+			add_political_power = 25
+			add_stability = 0.025
+			
+			#hidden_effect = {
+			#	set_variable = {
+			#		var = tno_minorities_effectiveness
+			#		value = 10
+			#	}
+			#}
+		}
+	}
+
+	focus = {
+		id = PRC_Military_Industry
+		icon = GFX_Industry_For_The_Defence_Of_Socialism
+		cost = 4.00
+		prerequisite = {
+			focus = PRC_Recruitment_campaign
+			focus = PRC_Legacy_of_the_Siberian_Red_Army
+		}
+		available = {
+			has_war = no
+		}
+		bypass = {
+			has_war = yes
+		}
+		x = 1
+		y = 1
+		relative_position_id = PRC_Recruitment_campaign
+		completion_reward = {
+			add_resource = {
+				type = power
+				amount = 1
+				state = 329
+			}
+			log = "[GetDateText]: [Root.GetName]: Focus PRC_Military_Industry"
+			SIB_increase_worker_tension_low = yes
+			set_temp_variable = {econ_centralization_temp = 5}
+			econ_centralization_change = yes 
+		}
+	}
+
+	focus = {
+		id = PRC_An_Elite_Army
+		icon = GFX_Those_Who_Fight_No_Longer
+		cost = 4.00
+		prerequisite = {
+			focus = PRC_Legacy_of_the_Siberian_Red_Army
+		}
+		available = {
+			has_war = no
+		}
+		bypass = {
+			has_war = yes
+		}
+		x = 1
+		y = 1
+		relative_position_id = PRC_Legacy_of_the_Siberian_Red_Army
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRC_An_Elite_Army"
+			tno_training_improve = yes
+			TNO_improve_military_supervision_policy_effectiveness_low = yes
+			TNO_improve_training_policy_effectiveness_low = yes
+		}
+	}
+
+	focus = {
+		id = PRC_Mobilize_the_Economy
+		icon = GFX_TNO_generic_socialist_industry
+		cost = 4.00
+		prerequisite = {
+			focus = PRC_Military_Industry
+		}
+		prerequisite = {
+			focus = PRC_Give_More_Rights
+			focus = PRC_An_Elite_Army
+		}
+		available = {
+			has_war = no
+		}
+		bypass = {
+			has_war = yes
+		}
+		x = -1
+		y = 1
+		relative_position_id = PRC_Military_Industry
+		completion_reward = {
+			set_temp_variable = {state_value_multiplier_temp = 1.2}
+			if = {
+				limit = { owns_state = 814}
+				814 = {
+					econ_state_value_change_multiply_specified_state = yes
+				}
+				set_temp_variable = {state_value_multiplier_temp = 1.2}
+				329 = {
+					econ_state_value_change_multiply_specified_state = yes
+				}
+			}
+			else = {
+				set_temp_variable = {state_value_multiplier_temp = 1.5}
+				329 = {
+					econ_state_value_change_multiply_specified_state = yes
+				}
+			}
+			SIB_increase_worker_tension_low = yes
+			set_temp_variable = {econ_centralization_temp = 5}
+			econ_centralization_change = yes 
+			log = "[GetDateText]: [Root.GetName]: Focus PRC_Mobilize_the_Economy"
+			#tno_economic_focus_improve = yes
+		}
+	}
+
+	focus = {
+		id = PRC_Improve_Our_Weapons
+		icon = GFX_DRL_Soviet_Arms
+		cost = 4.00
+		prerequisite = {
+			focus = PRC_Military_Industry
+		}
+		prerequisite = {
+			focus = PRC_Give_More_Rights
+			focus = PRC_An_Elite_Army
+		}
+		available = {
+			has_war = no
+		}
+		bypass = {
+			has_war = yes
+		}
+		x = 1
+		y = 1
+		relative_position_id = PRC_Military_Industry
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRC_Improve_Our_Weapons"
+			add_tech_bonus = {
+				bonus = 0.50
+				uses = 2
+				category = infantry_weapons
+			}
+		}
+	}
+
+	focus = {
+		id = PRC_Last_Preparations
+		icon = GFX_CAU_Prepare_the_Troops
+		cost = 3.00
+		prerequisite = {
+			focus = PRC_Improve_Our_Weapons
+		}
+		prerequisite = {
+			focus = PRC_Mobilize_the_Economy
+		}
+		available = {
+			has_war = no
+		}
+		bypass = {
+			has_war = yes
+		}
+		x = 1
+		y = 1
+		relative_position_id = PRC_Mobilize_the_Economy
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRC_Last_Preparations"
+			add_war_support = 0.05
+		}
+	}
+
+	focus = {
+		id = PRC_War_with_Menjiang
+		icon = GFX_CHI_Strike_when_the_Iron_is_hot
+		cost = 2.50
+		prerequisite = {
+			focus = PRC_Last_Preparations
+		}
+		available = {
+			country_exists = MEN
+			NOT = {
+				country_exists = MON
+				has_war_with = MEN
+			}
+			hidden_trigger = {
+				NOT = { has_global_flag = PRC_MEN_war }
+			}
+		}
+		bypass = {
+			has_war_with = MEN
+			hidden_trigger = {
+				has_global_flag = PRC_MEN_war
+			}
+		}
+		will_lead_to_war_with = MEN
+		x = 0
+		y = 1
+		relative_position_id = PRC_Last_Preparations
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRC_War_with_Menjiang"
+			effect_tooltip = {
+				declare_war_on = {
+					target = MEN
+					type = topple_government
+				}
+			}
+			hidden_effect = {
+				MEN = { #because puppet fuckery
+					add_state_core = 814
+					declare_war_on = {
+						target = PRC
+						type = take_core_state
+						generator = { 814 }
+					}
+				}
+				set_global_flag = PRC_MEN_war
+				if = {
+					limit = {
+						NOT = { has_country_flag = PRC_war_tree }
+					}
+					set_country_flag = PRC_war_tree
+					load_focus_tree = { tree = PRC_war_tree keep_completed = yes }
+				}
+				PRC_Get_war_date = yes
+			}
+		}
+	}
+}
+#
+#focus_tree = {
+#	id = PRC_war_tree
+#	country = {
+#		factor = 0
+#		modifier = {
+#			add = 20
+#			tag = PRC
+#		}
+#	}
+#	default = no
+#	shared_focus = PRC_The_Eastern_Conflict
+#}
+#
+#focus_tree = {
+#	id = PRC_post_war_tree
+#	country = {
+#		factor = 0
+#		modifier = {
+#			add = 20
+#			tag = PRC
+#		}
+#	}
+#	default = no
+#	shared_focus = PRC_Aftermath_of_the_War
+#	shared_focus = PRC_Red_Spring
+#}
+#
+#focus_tree = {
+#	id = PRC_blank_tree
+#	country = {
+#		factor = 0
+#		modifier = {
+#			add = 20
+#			tag = PRC
+#		}
+#	}
+#	default = no
+#}
+#
+#focus_tree = {
+#	id = PRC_regional_tree
+#	country = {
+#		factor = 0
+#		modifier = {
+#			add = 20
+#			tag = PRC
+#		}
+#	}
+#	default = no
+#	shared_focus = PRC_Secure_our_Position
+#	shared_focus = PRC_Into_the_Military_Front
+#	shared_focus = PRC_Restoring_our_Riches
+#	shared_focus = PRC_The_International_Field
+#}
+#
+#
+#focus_tree = {
+#	id = PRC_superregional_tree
+#	country = {
+#		factor = 0
+#		modifier = {
+#			add = 20
+#			tag = PRC
+#		}
+#	}
+#	default = no
+#	shared_focus = PRC_MIL_A_United_Siberia
+#	shared_focus = RUS_SIB_nukes_into_the_atomic_age
+#}
+#
