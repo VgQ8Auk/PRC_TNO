@@ -1107,7 +1107,9 @@ PRC_A_New_Future_tt: "We must ensure we are able to §Goverpower§! our opposing
 PRC_elimination_of_citizenry: "This will §xeliminate§! the §MCitizenry§!"
 PRC_elimination_of_military: "This will §xeliminate§! the §RMilitary§!"
 
-PRC_war_commies_forever_tt: "§RWe will maintain the policy of War Communism§!"
+PRC_war_commies_forever_tt: "§RWe will maintain the policy of War Communism!"
 PRC_a_more_civilian_econ_tt: "§MWe will transition to a Worker Directed Economy§!"
 
 ###################
+PRC_load_MON_tt: "§BWe will recruit Mongolian cavalries into our army§."
+PRC_load_RUS_tt: "§BWe will recruit more infantry units into our army§."

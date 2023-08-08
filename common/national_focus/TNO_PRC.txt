@@ -176,6 +176,10 @@ focus_tree = {
 			add_manpower = 500
 			TNO_improve_conscription_policy_effectiveness_med = yes
 			TNO_worsen_army_professionalism_med = yes
+			hidden_effect = {
+				load_oob = "MON_1962"
+			}
+			custom_effect_tooltip = PRC_load_MON_tt
 		}
 	}
 
@@ -198,6 +202,11 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus PRC_Legacy_of_the_Siberian_Red_Army"
 			army_experience = 25
+			
+			hidden_effect = {
+				load_oob = "PRC_1962"
+			}
+			custom_effect_tooltip = PRC_load_RUS_tt
 		}
 	}
 
@@ -224,8 +233,8 @@ focus_tree = {
 				id = PRC.15
 				days = 1
 			}
-			add_political_power = 25
-			add_stability = 0.025
+			add_political_power = 50
+			add_stability = 0.1
 			
 			#hidden_effect = {
 			#	set_variable = {
@@ -398,10 +407,16 @@ focus_tree = {
 		prerequisite = {
 			focus = PRC_Last_Preparations
 		}
+		select_effect = {
+			hidden_effect = {
+				814 = {set_demilitarized_zone = yes}
+				330 = {set_demilitarized_zone = yes}
+			}
+		}
 		available = {
 			country_exists = MEN
 			NOT = {
-				country_exists = MON
+				#country_exists = MON
 				has_war_with = MEN
 			}
 			hidden_trigger = {
@@ -414,7 +429,7 @@ focus_tree = {
 				has_global_flag = PRC_MEN_war
 			}
 		}
-		will_lead_to_war_with = MEN
+		#will_lead_to_war_with = MEN
 		x = 0
 		y = 1
 		relative_position_id = PRC_Last_Preparations
@@ -426,6 +441,7 @@ focus_tree = {
 					type = topple_government
 				}
 			}
+			mark_focus_tree_layout_dirty = yes
 			hidden_effect = {
 				MEN = { #because puppet fuckery
 					add_state_core = 814
@@ -441,9 +457,315 @@ focus_tree = {
 						NOT = { has_country_flag = PRC_war_tree }
 					}
 					set_country_flag = PRC_war_tree
-					load_focus_tree = { tree = PRC_war_tree keep_completed = yes }
+					#load_focus_tree = { tree = PRC_war_tree keep_completed = yes }
 				}
 				PRC_Get_war_date = yes
+			}
+		}
+	}
+	########################################################################################
+	focus = {
+		id = PRC_Backline_Defense
+		icon = GFX_YUN_The_Best_Defense
+		cost = 2.00
+		prerequisite = {
+			focus = PRC_War_with_Menjiang
+		}
+		allow_branch = {
+			has_country_flag = PRC_war_tree
+		}
+		available = {
+			has_war = yes
+		}
+		bypass = {
+			has_war = no
+		}
+		x = -2
+		y = 1
+		relative_position_id = PRC_War_with_Menjiang
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRC_Backline_Defense"
+			814 = {
+				add_building_construction = {
+					type = bunker
+					level = 1
+					instant_build = yes
+					province = {
+						id = 10539
+					}
+				}
+			}
+			329 = {
+				add_building_construction = {
+					type = bunker
+					level = 1
+					instant_build = yes
+					province = {
+						id = 10627
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PRC_Guns_From_the_Great_Patriotic_War
+		icon = GFX_TNO_generic_gun_production
+		cost = 2.00
+		prerequisite = {
+			focus = PRC_War_with_Menjiang
+		}
+		allow_branch = {
+			has_country_flag = PRC_war_tree
+		}
+		available = {
+			has_war = yes
+		}
+		bypass = {
+			has_war = no
+		}
+		x = 0
+		y = 1
+		relative_position_id = PRC_War_with_Menjiang
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRC_Guns_From_the_Great_Patriotic_War"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment_1
+				amount = 800
+			}
+		}
+	}
+
+	focus = {
+		id = PRC_War_Propaganda
+		icon = GFX_IRK_propaganda
+		cost = 2.00
+		prerequisite = {
+			focus = PRC_War_with_Menjiang
+		}
+		allow_branch = {
+			has_country_flag = PRC_war_tree
+		}
+		available = {
+			has_war = yes
+		}
+		bypass = {
+			has_war = no
+		}
+		x = 2
+		y = 1
+		relative_position_id = PRC_War_with_Menjiang
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRC_War_Propaganda"
+			add_war_support = 0.05
+		}
+	}
+
+	focus = {
+		id = PRC_Evacuate_Western_Mongolia
+		icon = GFX_UPO_Prepare_the_Evacuations
+		cost = 2.00
+		prerequisite = {
+			focus = PRC_Backline_Defense
+		}
+		available = {
+			has_war = yes
+		}
+		bypass = {
+			has_war = no
+		}
+		x = 0
+		y = 1
+		relative_position_id = PRC_Backline_Defense
+		completion_reward = {
+			custom_effect_tooltip = PRC_GDP_transfer_tt
+			subtract_from_variable = {814.state_value = 50}
+			add_to_variable = {329.state_value = 50}	
+			log = "[GetDateText]: [Root.GetName]: Focus PRC_Evacuate_Western_Mongolia"
+			SIB_increase_worker_tension_high = yes
+		}
+	}
+
+	focus = {
+		id = PRC_Red_Shells
+		icon = GFX_generic_preserve_communism
+		cost = 2.00
+		prerequisite = {
+			focus = PRC_Guns_From_the_Great_Patriotic_War
+		}
+		available = {
+			has_war = yes
+		}
+		bypass = {
+			has_war = no
+		}
+		x = 0
+		y = 1
+		relative_position_id = PRC_Guns_From_the_Great_Patriotic_War
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRC_Red_Shells"
+			add_equipment_to_stockpile = {
+				type = artillery_equipment
+				amount = 150
+			}
+		}
+	}
+
+	focus = {
+		id = PRC_Expand_Conscription
+		icon = GFX_TNO_generic_socialist_recruitment
+		cost = 2.00
+		prerequisite = {
+			focus = PRC_War_Propaganda
+		}
+		available = {
+			has_war = yes
+		}
+		bypass = {
+			has_war = no
+		}
+		x = 0
+		y = 1
+		relative_position_id = PRC_War_Propaganda
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRC_Expand_Conscription"
+			tno_conscription_worsen = yes
+			hidden_effect = {
+				TNO_worsen_conscription_policy_effectiveness_med = yes
+			}
+		}
+	}
+
+	focus = {
+		id = PRC_Last_Stand
+		icon = GFX_IRK_the_union_forever
+		cost = 0.70
+		available = {
+			has_war = yes
+		}
+		prerequisite = {
+			focus = PRC_Evacuate_Western_Mongolia
+			focus = PRC_Red_Shells
+			focus = PRC_Expand_Conscription
+		}
+		x = 0
+		y = 1
+		relative_position_id = PRC_Expand_Conscription
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRC_Last_Stand"
+			add_timed_idea = {
+				idea = PRC_last_stand_idea
+				days = 20
+			}
+		}
+	}
+
+	focus = {
+		id = PRC_Offer_a_Peace_Deal
+		icon = GFX_SIB_diplo_organ
+		cost = 0.50
+		available = {
+			has_war = yes
+			NOT = { controls_state = 814 }
+		}
+		mutually_exclusive = {
+			focus = PRC_Ask_for_a_ceasefire
+		}
+		bypass = {
+			has_war = no
+		}
+		prerequisite = {
+			focus = PRC_Evacuate_Western_Mongolia
+			focus = PRC_Red_Shells
+			focus = PRC_Expand_Conscription
+		}
+		x = 0
+		y = 1
+		relative_position_id = PRC_Evacuate_Western_Mongolia
+		ai_will_do = {
+			factor = 0.1
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRC_Offer_a_Peace_Deal"
+			MEN = {
+				country_event = {
+					id = PRC.10
+					hours = 6
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PRC_Ask_for_a_ceasefire
+		icon = GFX_KOM_peace
+		cost = 0.50
+		available = {
+			has_war = yes
+			controls_state = 814
+			OR = {
+				MEN = {
+					surrender_progress > 0.1
+				}
+				custom_trigger_tooltip = {
+					tooltip = PRC_Ask_for_a_ceasefire_tt
+					meta_trigger = {
+						text = {
+							date > [Get_PRC_war_date]
+						}
+						Get_PRC_war_date = "[?PRC_war_date.GetDateStringNoHour]"
+					}
+				}
+			}
+		}
+		mutually_exclusive = {
+			focus = PRC_Offer_a_Peace_Deal
+		}
+		prerequisite = {
+			focus = PRC_Evacuate_Western_Mongolia
+			focus = PRC_Red_Shells
+			focus = PRC_Expand_Conscription
+		}
+		x = 0
+		y = 1
+		relative_position_id = PRC_Red_Shells
+		ai_will_do = {
+			factor = 2
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRC_Ask_for_a_ceasefire"
+			MEN = {
+				country_event = {
+					id = PRC.8
+					hours = 6
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PRC_Peace_at_least
+		icon = GFX_generic_diplomacy_peace
+		cost = 1.50
+		available = {
+			has_war = no
+		}
+		prerequisite = {
+			focus = PRC_Offer_a_Peace_Deal
+			focus = PRC_Ask_for_a_ceasefire
+		}
+		x = -2
+		y = 1
+		relative_position_id = PRC_Last_Stand
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRC_Peace_at_least"
+			country_event = {
+				id = PRC.17
+				days = 1
+			}
+			hidden_effect = {
+				load_focus_tree = { tree = PRC_post_war_tree keep_completed = yes }
+				complete_national_focus = PRC_Aftermath_of_the_War
 			}
 		}
 	}

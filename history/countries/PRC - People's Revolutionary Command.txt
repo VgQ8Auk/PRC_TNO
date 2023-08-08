@@ -420,8 +420,6 @@ capital = 329
 # Vacant
 recruit_character = PRC_Generic_Vacant
 
-set_stability  = -0.05
-
 set_country_flag = is_russian_nation
 
 recruit_character = PRC_Aleksandr_Vasilevsky
@@ -439,7 +437,8 @@ recruit_character = PRC_Batyn_Dorzh
 recruit_character = PRC_Butochiyn_Tsog
 recruit_character = PRC_Lodongiin_Dandar
 
-oob = "PRC_1962"
+
+oob = "PRC_1962_old"
 add_manpower = 13000
 
 ###Playable

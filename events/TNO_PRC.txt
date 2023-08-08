@@ -214,16 +214,21 @@ country_event = { #Ceasefire, for MEN
 				id = PRC.9
 				hours = 1
 			}
+			transfer_state = 814
+			add_state_core = 814
 			save_global_event_target_as = winning_country
 			white_peace = MEN
 			white_peace = MAN
 			white_peace = JAP
 			white_peace = CHI
+			add_state_core = 814
+			hidden_effect = {  }
 		}
 		MEN = {
-			hidden_effect = { remove_state_core = 814 }
+			remove_state_core = 814
+			#hidden_effect = { remove_state_core = 814 }
 			save_global_event_target_as = losing_country
-			MEN_buff_mengjiang = yes
+			#MEN_buff_mengjiang = yes
 		}
 		set_global_flag = war_won
 		set_global_flag = show_peace_popup_alert
@@ -283,7 +288,7 @@ country_event = { #surrender, for MEN
 		}
 		MEN = {
 			save_global_event_target_as = winning_country
-			MEN_buff_mengjiang = yes
+			#MEN_buff_mengjiang = yes
 		}
 		set_global_flag = war_won
 		set_global_flag = show_peace_popup_alert

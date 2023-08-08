@@ -1,7 +1,7 @@
 ﻿division_template = {
 	name = "Angijralyn Diviziin"
 
-	division_names_group = MON_CAV_01
+	division_names_group = PRC_CAV_01
 
 	regiments = {
 		cavalry = { x = 0 y = 0 }
@@ -18,7 +18,7 @@ units = {
 			is_name_ordered = yes
 			name_order = 1
 		}
-		location = 4801
+		location = 10597 #4801
 		division_template = "Angijralyn Diviziin"
 		start_experience_factor = 0.3
 
@@ -29,7 +29,7 @@ units = {
 			is_name_ordered = yes
 			name_order = 2
 		}
-		location = 1781
+		location = 12610 #1781
 		division_template = "Angijralyn Diviziin"
 		start_experience_factor = 0.3
 
@@ -40,7 +40,7 @@ units = {
 			is_name_ordered = yes
 			name_order = 3
 		}
-		location = 7885
+		location = 1877 #7885
 		division_template = "Angijralyn Diviziin"
 		start_experience_factor = 0.3
 
@@ -51,7 +51,7 @@ units = {
 			is_name_ordered = yes
 			name_order = 4
 		}
-		location = 12541
+		location = 1676 #12541
 		division_template = "Angijralyn Diviziin"
 		start_experience_factor = 0.3
 
@@ -62,7 +62,7 @@ units = {
 			is_name_ordered = yes
 			name_order = 5
 		}
-		location = 10704
+		location = 7703 #10704
 		division_template = "Angijralyn Diviziin"
 		start_experience_factor = 0.2
 
@@ -73,7 +73,7 @@ units = {
 			is_name_ordered = yes
 			name_order = 6
 		}
-		location = 12686
+		location = 7804 #12686
 		division_template = "Angijralyn Diviziin"
 		start_experience_factor = 0.2
 
@@ -101,25 +101,25 @@ units = {
 }
 
 ### Starting Equipment ###
-
-instant_effect = {
-     add_equipment_production = {
-          equipment = {
-              type = infantry_equipment_1
-              creator = "MON"
-              }
-              requested_factories = 1
-              progress = 0.20
-              efficiency = 100
-              }
-	
-	 add_equipment_production = {
-          equipment = {
-              type = anti_tank_equipment_0
-              creator = "MON"
-              }
-              requested_factories = 1
-              progress = 0.20
-              efficiency = 100
-              }
-}
+#
+#instant_effect = {
+#     add_equipment_production = {
+#          equipment = {
+#              type = infantry_equipment_1
+#              creator = "MON"
+#              }
+#              requested_factories = 1
+#              progress = 0.20
+#              efficiency = 100
+#              }
+#	
+#	 add_equipment_production = {
+#          equipment = {
+#              type = anti_tank_equipment_0
+#              creator = "MON"
+#              }
+#              requested_factories = 1
+#              progress = 0.20
+#              efficiency = 100
+#              }
+#}
